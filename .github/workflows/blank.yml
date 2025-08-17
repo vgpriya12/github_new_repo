@@ -19,17 +19,28 @@ on:
         default: 'warning'
         type: choice
         options:
-        - info
-        - warning
-        - debug
-       tags:
+          - info
+          - warning
+          - debug
+
+      tags:
         description: 'Test scenario tags'
         required: false
         type: boolean
+
       environment:
         description: 'Environment to run tests against'
-        type: environment
         required: true
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Echo inputs
+        run: |
+          echo "Log Level: ${{ inputs.logLevel }}"
+          echo "Tags: ${{ inputs.tags }}"
+          echo "Environment: ${{ inputs.environment }}"
   
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
